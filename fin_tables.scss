@@ -1,0 +1,8 @@
+.budget_view_wrapper {margin:12px;
+@include container-wrapper;
+}
+.budget_flds>div{height:30px;min-height:30px;padding-top:5px;}
+.budget_flds>div:first-child{border-bottom: $border_default;}
+.table-items-list > tr.item > td.budget_flds{padding:0;text-align: right;}
+.table-items-list > tr.item > td.rt_field_titles{padding:0;}
+.table-items-list > tr.wo_header > td{min-width:80px;}

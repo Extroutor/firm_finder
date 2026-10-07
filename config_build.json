@@ -1,0 +1,1852 @@
+{
+    "module": "firms_finder",
+    "libs": {
+        "firms": {
+            "menu_section": "Бухгалтерия и финансы",
+            "mandatory": 0,
+            "title": "Юридические лица",
+            "title2": "фирму",
+            "title3": "фирма",
+            "table": "firms",
+            "version": 1,
+            "conversion_table": {
+                "create_tm": {
+                    "func": "format_datetime_from_tm"
+                },
+                "parent": {
+                    "lib": "firms_categories"
+                },
+                "phones_json": {
+                    "func": "format_phones_json"
+                },
+                "emails_json": {
+                    "func": "format_emails_json"
+                },
+                "manager": {
+                    "lib": "users"
+                },
+                "full_name": {
+                    "searchable": 1
+                }
+            },
+            "disabled_edit_fields": {
+                "is_grp": 1
+            },
+            "must_have_fields": {
+                "inn": 1
+            },
+            "translate": {
+                "create_tm": "Дата создания",
+                "parent": "Категория",
+                "name": "Наименование",
+                "inn": "ИНН",
+                "kpp": "КПП",
+                "ogrn": "ОГРН",
+                "okpo": "ОКПО",
+                "buh_name": "Главный бухгалтер",
+                "responsible_docs": "Ответственный за документы",
+                "responsible_docs_title": "Должность ответственного за документы",
+                "uraddress": "Юридический адрес",
+                "address": "Адрес",
+                "post_address": "Почтовый адрес",
+                "phones_json": "Телефон",
+                "comments": "Комментарии",
+                "firm_info": "Информация о фирме",
+                "is_grp": "Является группой"
+            },
+            "include_js": {
+                "edit": [
+                    "firms_edit_form.js",
+                    "firms_finder.js"
+                ]
+            },
+            "file_attachment": 1,
+            "enable_archive": 1,
+            "list_enabled_fields": {
+                "parent": 120,
+                "name": 200,
+                "inn": 120,
+                "gendir_name": 1,
+                "buh_name": 1,
+                "address": 1,
+                "phones_json": 150,
+                "emails_json": 150,
+                "comments": 1
+            },
+            "short_list_enabled_fields": {
+                "name": 200,
+                "full_name": 200,
+                "inn": 120
+            },
+            "card_fields": {
+                "create_tm": "Общая информация",
+                "parent": "Общая информация",
+                "name": "Общая информация",
+                "full_name": "Общая информация",
+                "inn": "Общая информация",
+                "kpp": "Общая информация",
+                "ogrn": "Общая информация",
+                "okpo": "Общая информация",
+                "gendir_name": "Контакты",
+                "buh_name": "Контакты",
+                "uraddress": "Контакты",
+                "address": "Контакты",
+                "phones_json": "Контакты",
+                "emails_json": "Контакты",
+                "comments": "Общая информация"
+            },
+            "span_fields": {
+                "full_name": 1,
+                "kpp": 1,
+                "ogrn": 1,
+                "okpo": 1,
+                "gendir_name": 1,
+                "buh_name": 1,
+                "uraddress": 1,
+                "address": 1,
+                "post_address": 1,
+                "comments": 1,
+                "firm_info": 1
+            },
+            "update_permissions": "manager",
+            "key_fields": [
+                {
+                    "inn": {
+                        "not_empty": 1
+                    }
+                },
+                {
+                    "name": {
+                        "only_letters": 1
+                    }
+                },
+                {
+                    "full_name": {
+                        "only_letters": 1
+                    }
+                }
+            ],
+            "permissions_check": {
+                "id": {
+                    "users_permissions": "firms"
+                }
+            },
+            "admin_flags": {
+                "view": {
+                    "name": "Просмотр",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "add": {
+                    "name": "Добавление",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "edit": {
+                    "name": "Редактирование",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "delete": {
+                    "name": "Удаление",
+                    "type": "checkbox",
+                    "default_checked": true
+                }
+            }
+        },
+        "firms_branchs": {
+            "menu_section": "Бухгалтерия и финансы",
+            "mandatory": 0,
+            "title": "Филиалы фирм",
+            "title2": "филиал фирмы",
+            "title3": "филиал фирмы",
+            "table": "firms_branchs",
+            "version": 1,
+            "conversion_table": {
+                "firm_id": {
+                    "lib": "firms"
+                },
+                "city": {
+                    "lib": "cities"
+                }
+            },
+            "translate": {
+                "firm_id": "Фирма",
+                "name": "Наименование",
+                "city": "Город",
+                "address": "Адрес"
+            },
+            "preload_cache": 1,
+            "admin_flags": {
+                "view": {
+                    "name": "Просмотр",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "add": {
+                    "name": "Добавление",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "edit": {
+                    "name": "Редактирование",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "delete": {
+                    "name": "Удаление",
+                    "type": "checkbox",
+                    "default_checked": true
+                },
+                "correct_check_disable": {
+                    "name": "Отмена обязательного заполнения полей",
+                    "type": "checkbox",
+                    "default_checked": false
+                }
+            }
+        },
+        "firms_contracts": {
+            "menu_section": "Бухгалтерия и финансы",
+            "mandatory": 0,
+            "title": "Договора контрагентов",
+            "title2": "договор контрагента",
+            "title3": "договор контрагента",
+            "table": "firms_contracts",
+            "version": 1,
+            "conversion_table": {
+                "firm_id": {
+                    "lib": "firms"
+                }
+            },
+            "default_values": {
+                "date_start": "0000-00-00",
+                "date_end": "0000-00-00"
+            },
+            "translate": {
+                "firm_id": "Фирма",
+                "contract_num": "Номер договора",
+                "date_start": "Дата с",
+                "date_end": "Дата по",
+                "comment": "Комментарий"
+            },
+            "short_list_enabled_fields": {
+                "firm_id": 1,
+                "contract_num": 1
+            },
+            "admin_flags": {
+                "view": {
+                    "name": "Просмотр",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "add": {
+                    "name": "Добавление",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "edit": {
+                    "name": "Редактирование",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "delete": {
+                    "name": "Удаление",
+                    "type": "checkbox",
+                    "default_checked": true
+                },
+                "correct_check_disable": {
+                    "name": "Отмена обязательного заполнения полей",
+                    "type": "checkbox",
+                    "default_checked": false
+                }
+            }
+        },
+        "firms_proxy": {
+            "menu_section": "Бухгалтерия и финансы",
+            "mandatory": 0,
+            "title": "Доверенности от фирм",
+            "table": "firms_proxy",
+            "version": 1,
+            "conversion_table": {
+                "firm": {
+                    "lib": "firms"
+                },
+                "firm_from": {
+                    "lib": "firms"
+                },
+                "category": {
+                    "lib": "firms_proxy_groups"
+                },
+                "date_start": {
+                    "func": "format_date"
+                },
+                "date_end": {
+                    "func": "format_date"
+                }
+            },
+            "translate": {
+                "firm": "Фирма",
+                "date_start": "Дата с",
+                "date_end": "Дата по",
+                "num": "Номер",
+                "firm_from": "Получение от фирмы",
+                "fio": "ФИО",
+                "job_title": "Должность",
+                "comment": "Комментарий",
+                "category": "Категория"
+            },
+            "span_fields": {
+                "comment": 1
+            },
+            "name_field": "firm,num",
+            "admin_flags": {
+                "view": {
+                    "name": "Просмотр",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "add": {
+                    "name": "Добавление",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "edit": {
+                    "name": "Редактирование",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "delete": {
+                    "name": "Удаление",
+                    "type": "checkbox",
+                    "default_checked": true
+                },
+                "correct_check_disable": {
+                    "name": "Отмена обязательного заполнения полей",
+                    "type": "checkbox",
+                    "default_checked": false
+                }
+            }
+        },
+        "firms_proxy_groups": {
+            "menu_section": "Бухгалтерия и финансы",
+            "mandatory": 0,
+            "title": "Категории доверенностей от фирм",
+            "table": "firms_proxy_groups",
+            "version": 1,
+            "translate": {
+                "name": "Название",
+                "parent": "Категория"
+            },
+            "admin_flags": {
+                "view": {
+                    "name": "Просмотр",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "add": {
+                    "name": "Добавление",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "edit": {
+                    "name": "Редактирование",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "delete": {
+                    "name": "Удаление",
+                    "type": "checkbox",
+                    "default_checked": true
+                },
+                "correct_check_disable": {
+                    "name": "Отмена обязательного заполнения полей",
+                    "type": "checkbox",
+                    "default_checked": false
+                }
+            }
+        },
+        "items_names": {
+            "menu_section": "Номенклатура и учет",
+            "mandatory": 0,
+            "title": "Номенклатура",
+            "table": "items_names",
+            "version": 1,
+            "conversion_table": {
+                "name": {
+                    "lib": "items_names_params"
+                },
+                "param1": {
+                    "lib": "items_names_params"
+                },
+                "group": {
+                    "lib": "items_names_groups"
+                }
+            },
+            "disabled_edit_fields": {
+                "param2": 1,
+                "param3": 1,
+                "param4": 1,
+                "param5": 1,
+                "param6": 1,
+                "param7": 1,
+                "analog_ids": 1
+            },
+            "translate": {
+                "name": "Наименование",
+                "param1": "Артикул",
+                "counts": "Ед. измерения",
+                "group": "Категория"
+            },
+            "include_js": {
+                "init_edit": "libs/items_names_init_edit.php"
+            },
+            "list_enabled_fields": {
+                "name": 1,
+                "param1": 1,
+                "counts": 1,
+                "group": 1
+            },
+            "key_fields": {
+                "param1": 1,
+                "name": 1
+            },
+            "admin_flags": {
+                "view": {
+                    "name": "Просмотр",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "add": {
+                    "name": "Добавление",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "edit": {
+                    "name": "Редактирование",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "delete": {
+                    "name": "Удаление",
+                    "type": "checkbox",
+                    "default_checked": true
+                },
+                "correct_check_disable": {
+                    "name": "Отмена обязательного заполнения полей",
+                    "type": "checkbox",
+                    "default_checked": false
+                }
+            }
+        },
+        "items_names_groups": {
+            "menu_section": "Номенклатура и учет",
+            "mandatory": 0,
+            "title": "Номенклатурные группы",
+            "title2": "группу номенклатуры",
+            "title3": "группа номенклатуры",
+            "table": "items_names_groups",
+            "version": 1,
+            "conversion_table": {
+                "parent": {
+                    "lib": "items_names_groups"
+                }
+            },
+            "translate": {
+                "parent": "Категория",
+                "name": "Наименование"
+            },
+            "enable_tree_view": 1,
+            "admin_flags": {
+                "view": {
+                    "name": "Просмотр",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "add": {
+                    "name": "Добавление",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "edit": {
+                    "name": "Редактирование",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "delete": {
+                    "name": "Удаление",
+                    "type": "checkbox",
+                    "default_checked": true
+                },
+                "correct_check_disable": {
+                    "name": "Отмена обязательного заполнения полей",
+                    "type": "checkbox",
+                    "default_checked": false
+                }
+            }
+        },
+        "items_names_info": {
+            "menu_section": "Номенклатура и учет",
+            "mandatory": 0,
+            "title": "Параметры номенклатуры",
+            "table": "items_names_info",
+            "version": 1,
+            "conversion_table": {
+                "item_id": {
+                    "lib": "items_names"
+                }
+            },
+            "translate": {
+                "item_id": "Товар",
+                "info_type": "Тип информации",
+                "info": "Инфо"
+            },
+            "admin_flags": {
+                "view": {
+                    "name": "Просмотр",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "add": {
+                    "name": "Добавление",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "edit": {
+                    "name": "Редактирование",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "delete": {
+                    "name": "Удаление",
+                    "type": "checkbox",
+                    "default_checked": true
+                },
+                "correct_check_disable": {
+                    "name": "Отмена обязательного заполнения полей",
+                    "type": "checkbox",
+                    "default_checked": false
+                }
+            }
+        },
+        "items_names_okei": {
+            "menu_section": "Номенклатура и учет",
+            "mandatory": 0,
+            "title": "Единицы измерения по ОКЕИ",
+            "table": "items_names_okei",
+            "version": 1,
+            "translate": {
+                "name": "Наименование",
+                "full_name": "Полное название"
+            },
+            "admin_flags": {
+                "view": {
+                    "name": "Просмотр",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "add": {
+                    "name": "Добавление",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "edit": {
+                    "name": "Редактирование",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "delete": {
+                    "name": "Удаление",
+                    "type": "checkbox",
+                    "default_checked": true
+                },
+                "correct_check_disable": {
+                    "name": "Отмена обязательного заполнения полей",
+                    "type": "checkbox",
+                    "default_checked": false
+                }
+            }
+        },
+        "nds_proc": {
+            "menu_section": "Номенклатура и учет",
+            "mandatory": 0,
+            "title": "Ставки НДС",
+            "title2": "Ставку НДС",
+            "title3": "Ставку НДС",
+            "table": "nds_proc",
+            "version": 1,
+            "translate": {
+                "name": "Наименование",
+                "proc": "Процент НДС"
+            },
+            "preload_cache": 1,
+            "admin_flags": {
+                "view": {
+                    "name": "Просмотр",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "add": {
+                    "name": "Добавление",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "edit": {
+                    "name": "Редактирование",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "delete": {
+                    "name": "Удаление",
+                    "type": "checkbox",
+                    "default_checked": true
+                },
+                "correct_check_disable": {
+                    "name": "Отмена обязательного заполнения полей",
+                    "type": "checkbox",
+                    "default_checked": false
+                }
+            }
+        },
+        "price_category": {
+            "menu_section": "Номенклатура и учет",
+            "mandatory": 0,
+            "title": "Категории цен",
+            "title2": "категорию",
+            "title3": "категория",
+            "table": "price_category",
+            "version": 1,
+            "conversion_table": {
+                "firm": {
+                    "lib": "firms"
+                }
+            },
+            "translate": {
+                "firm": "Фирма",
+                "name": "Наименование",
+                "type": "Тип"
+            },
+            "preload_cache": 1,
+            "admin_flags": {
+                "view": {
+                    "name": "Просмотр",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "add": {
+                    "name": "Добавление",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "edit": {
+                    "name": "Редактирование",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "delete": {
+                    "name": "Удаление",
+                    "type": "checkbox",
+                    "default_checked": true
+                },
+                "correct_check_disable": {
+                    "name": "Отмена обязательного заполнения полей",
+                    "type": "checkbox",
+                    "default_checked": false
+                }
+            }
+        },
+        "storages": {
+            "menu_section": "Номенклатура и учет",
+            "mandatory": 0,
+            "title": "Склады",
+            "title2": "склад",
+            "title3": "склад",
+            "table": "storages",
+            "version": 1,
+            "conversion_table": {
+                "category": {
+                    "lib": "storage_groups"
+                },
+                "firm": {
+                    "lib": "firms"
+                },
+                "branch_id": {
+                    "lib": "firms_branchs"
+                },
+                "type": {
+                    "data": []
+                }
+            },
+            "must_have_fields": {
+                "firm": 1,
+                "name": 1
+            },
+            "translate": {
+                "category": "Категория",
+                "firm": "Фирма",
+                "branch_id": "Филиал",
+                "name": "Наименование",
+                "short_name": "Краткое наименование",
+                "type": "Тип",
+                "ext_id": "Внешний номер",
+                "disabled_in_search": "Отключен в поиске товаров",
+                "disabled_items_counts": "Не пересчитывать остатки",
+                "address": "Адрес",
+                "kpp": "КПП",
+                "list_order": "Приоритет в списке"
+            },
+            "list_enabled_fields": {
+                "firm": 1,
+                "name": 1
+            },
+            "short_list_enabled_fields": {
+                "name": 1
+            },
+            "name_field": "name",
+            "short_name_field": "name",
+            "permissions_check": {
+                "and": {
+                    "firm": {
+                        "users_permissions": "firms"
+                    }
+                },
+                "id": {
+                    "users_permissions": "storages"
+                }
+            },
+            "admin_flags": {
+                "view": {
+                    "name": "Просмотр",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "add": {
+                    "name": "Добавление",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "edit": {
+                    "name": "Редактирование",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "delete": {
+                    "name": "Удаление",
+                    "type": "checkbox",
+                    "default_checked": true
+                },
+                "correct_check_disable": {
+                    "name": "Отмена обязательного заполнения полей",
+                    "type": "checkbox",
+                    "default_checked": false
+                }
+            }
+        },
+        "storage_address": {
+            "menu_section": "Номенклатура и учет",
+            "mandatory": 0,
+            "title": "Складские адреса",
+            "table": "storage_address",
+            "version": 1,
+            "translate": {
+                "level": "Уровень",
+                "name": "Наименование",
+                "full_name": "Полное название"
+            },
+            "preload_cache": 1,
+            "admin_flags": {
+                "view": {
+                    "name": "Просмотр",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "add": {
+                    "name": "Добавление",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "edit": {
+                    "name": "Редактирование",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "delete": {
+                    "name": "Удаление",
+                    "type": "checkbox",
+                    "default_checked": true
+                },
+                "correct_check_disable": {
+                    "name": "Отмена обязательного заполнения полей",
+                    "type": "checkbox",
+                    "default_checked": false
+                }
+            }
+        },
+        "storage_groups": {
+            "menu_section": "Номенклатура и учет",
+            "mandatory": 0,
+            "title": "Категории складов",
+            "table": "storage_groups",
+            "version": 1,
+            "conversion_table": {
+                "parent": {
+                    "lib": "storage_groups"
+                }
+            },
+            "translate": {
+                "parent": "Категория",
+                "name": "Наименование"
+            },
+            "preload_cache": 1,
+            "admin_flags": {
+                "view": {
+                    "name": "Просмотр",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "add": {
+                    "name": "Добавление",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "edit": {
+                    "name": "Редактирование",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "delete": {
+                    "name": "Удаление",
+                    "type": "checkbox",
+                    "default_checked": true
+                },
+                "correct_check_disable": {
+                    "name": "Отмена обязательного заполнения полей",
+                    "type": "checkbox",
+                    "default_checked": false
+                }
+            }
+        },
+        "firms_categories": {
+            "menu_section": "Бухгалтерия и финансы",
+            "mandatory": 0,
+            "title": "Категории юр.лиц",
+            "title2": "Категории юр.лиц",
+            "title3": "Категории юр.лиц",
+            "table": "firms_categories",
+            "version": 1,
+            "conversion_table": {
+                "parent": {
+                    "lib": "firms_categories"
+                }
+            },
+            "translate": {
+                "name": "Заголовок"
+            },
+            "enable_tree_view": 1,
+            "preload_cache": 1,
+            "admin_flags": {
+                "view": {
+                    "name": "Просмотр",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "add": {
+                    "name": "Добавление",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "edit": {
+                    "name": "Редактирование",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "delete": {
+                    "name": "Удаление",
+                    "type": "checkbox",
+                    "default_checked": true
+                }
+            }
+        },
+        "bank_accounts": {
+            "menu_section": "Бухгалтерия и финансы",
+            "mandatory": 0,
+            "title": "Счета в банках",
+            "title2": "счет",
+            "title3": "счет",
+            "table": "bank_accounts",
+            "version": 1,
+            "conversion_table": {
+                "firm_id": {
+                    "lib": "firms"
+                },
+                "valute": {
+                    "lib": "valutes"
+                }
+            },
+            "translate": {
+                "firm_id": "Фирма",
+                "bank_name": "Банк",
+                "bik": "БИК",
+                "kor_account": "Кор. счет",
+                "account": "Счет",
+                "is_main": "Основной",
+                "valute": "Валюта счета"
+            },
+            "enable_archive": 1,
+            "admin_flags": {
+                "view": {
+                    "name": "Просмотр",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "add": {
+                    "name": "Добавление",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "edit": {
+                    "name": "Редактирование",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "delete": {
+                    "name": "Удаление",
+                    "type": "checkbox",
+                    "default_checked": true
+                },
+                "correct_check_disable": {
+                    "name": "Отмена обязательного заполнения полей",
+                    "type": "checkbox",
+                    "default_checked": false
+                }
+            }
+        },
+        "valutes": {
+            "menu_section": "Номенклатура и учет",
+            "mandatory": 0,
+            "title": "Валюты",
+            "title2": "валюту",
+            "title3": "валюта",
+            "table": "valutes",
+            "version": 1,
+            "translate": {
+                "name": "Наименование",
+                "short_name": "Краткое наименование",
+                "short_name2": "Краткий символ",
+                "full_name": "Полное название",
+                "eng": "Английское наименование",
+                "code": "Код",
+                "padez": "Падеж"
+            },
+            "preload_cache": 1,
+            "admin_flags": {
+                "view": {
+                    "name": "Просмотр",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "add": {
+                    "name": "Добавление",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "edit": {
+                    "name": "Редактирование",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "delete": {
+                    "name": "Удаление",
+                    "type": "checkbox",
+                    "default_checked": true
+                },
+                "correct_check_disable": {
+                    "name": "Отмена обязательного заполнения полей",
+                    "type": "checkbox",
+                    "default_checked": false
+                }
+            }
+        },
+        "items_names_params": {
+            "menu_section": "Номенклатура и учет",
+            "mandatory": 0,
+            "title": "Параметры номенклатуры",
+            "title2": "Параметры номенклатуры",
+            "title3": "Параметры номенклатуры",
+            "table": "items_names_params",
+            "version": 1,
+            "conversion_table": {
+                "param_n": {
+                    "lib": "items_names_params_names"
+                }
+            },
+            "translate": {
+                "value": "Значение"
+            },
+            "list_enabled_fields": {
+                "value": 1,
+                "code": 1
+            },
+            "short_list_enabled_fields": {
+                "value": 1
+            },
+            "name_field": "value",
+            "short_name_field": "value",
+            "admin_flags": {
+                "view": {
+                    "name": "Просмотр",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "add": {
+                    "name": "Добавление",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "edit": {
+                    "name": "Редактирование",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "delete": {
+                    "name": "Удаление",
+                    "type": "checkbox",
+                    "default_checked": true
+                }
+            }
+        },
+        "items_names_params_names": {
+            "menu_section": "Номенклатура и учет",
+            "mandatory": 0,
+            "title": "Наименование параметра номенклатуры",
+            "title2": "Наименование параметра номенклатуры",
+            "title3": "Наименование параметра номенклатуры",
+            "table": "items_names_params_names",
+            "version": 1,
+            "translate": {
+                "param_n": "Порядок",
+                "name": "Наименование"
+            },
+            "admin_flags": {
+                "view": {
+                    "name": "Просмотр",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "add": {
+                    "name": "Добавление",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "edit": {
+                    "name": "Редактирование",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "delete": {
+                    "name": "Удаление",
+                    "type": "checkbox",
+                    "default_checked": true
+                }
+            }
+        },
+        "firms_branches": {
+            "menu_section": "Бухгалтерия и финансы",
+            "mandatory": 0,
+            "title": "Подразделения организаций",
+            "title2": "подразделение фирмы",
+            "title3": "подразделение фирмы",
+            "table": "firms_branches",
+            "version": 1,
+            "conversion_table": {
+                "parent": {
+                    "lib": "firms_branches"
+                },
+                "firm_id": {
+                    "lib": "firms"
+                },
+                "city": {
+                    "lib": "cities"
+                }
+            },
+            "translate": {
+                "firm_id": "Фирма",
+                "parent": "Подразделение",
+                "name": "Наименование",
+                "city": "Город",
+                "address": "Адрес"
+            },
+            "enable_tree_view": 1,
+            "preload_cache": 1,
+            "admin_flags": {
+                "view": {
+                    "name": "Просмотр",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "add": {
+                    "name": "Добавление",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "edit": {
+                    "name": "Редактирование",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "delete": {
+                    "name": "Удаление",
+                    "type": "checkbox",
+                    "default_checked": true
+                },
+                "correct_check_disable": {
+                    "name": "Отмена обязательного заполнения полей",
+                    "type": "checkbox",
+                    "default_checked": false
+                }
+            }
+        },
+        "firms_structure_types": {
+            "menu_section": "Кадры",
+            "mandatory": 0,
+            "title": "Типы организационной структуры предприятия",
+            "title2": "Типы организационной структуры предприятия",
+            "title3": "Типы организационной структуры предприятия",
+            "table": "firms_structure_types",
+            "version": 1,
+            "conversion_table": {
+                "firm_id": {
+                    "lib": "firms",
+                    "type": "bigint"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "position": {
+                    "type": "bool"
+                },
+                "actual": {
+                    "type": "bool"
+                },
+                "author": {
+                    "lib": "users",
+                    "type": "int"
+                },
+                "tm": {
+                    "func": "format_datetime_from_tm",
+                    "type": "int"
+                }
+            },
+            "disabled_edit_fields": {
+                "author": 1,
+                "tm": 1
+            },
+            "default_values": {
+                "actual": 1
+            },
+            "translate": {
+                "firm_id": "Организация",
+                "name": "Наименование",
+                "position": "Должность",
+                "actual": "Актуальный",
+                "author": "Автор",
+                "tm": "Время создания"
+            },
+            "admin_flags": {
+                "view": {
+                    "name": "Просмотр",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "add": {
+                    "name": "Добавление",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "edit": {
+                    "name": "Редактирование",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "delete": {
+                    "name": "Удаление",
+                    "type": "checkbox",
+                    "default_checked": true
+                }
+            }
+        },
+        "firms_structure": {
+            "menu_section": "Кадры",
+            "mandatory": 0,
+            "title": "Организационная структура предприятия",
+            "title2": "Организационная структура предприятия",
+            "title3": "Организационная структура предприятия",
+            "table": "firms_structure",
+            "version": 1,
+            "conversion_table": {
+                "firm_id": {
+                    "lib": "firms",
+                    "type": "bigint"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "lib": "firms_structure_types",
+                    "type": "int"
+                },
+                "parent": {
+                    "lib": "firms_structure",
+                    "type": "bigint"
+                },
+                "actual": {
+                    "type": "bool"
+                },
+                "author": {
+                    "lib": "users",
+                    "type": "int"
+                },
+                "tm": {
+                    "func": "format_datetime_from_tm",
+                    "type": "int"
+                }
+            },
+            "disabled_edit_fields": {
+                "author": 1,
+                "tm": 1
+            },
+            "default_values": {
+                "actual": 1
+            },
+            "translate": {
+                "firm_id": "Организация",
+                "name": "Наименование",
+                "type": "Подразделение",
+                "parent": "Родительский элемент",
+                "actual": "Актуальный",
+                "author": "Автор",
+                "tm": "Время создания"
+            },
+            "enable_tree_view": 1,
+            "admin_flags": {
+                "view": {
+                    "name": "Просмотр",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "add": {
+                    "name": "Добавление",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "edit": {
+                    "name": "Редактирование",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "delete": {
+                    "name": "Удаление",
+                    "type": "checkbox",
+                    "default_checked": true
+                }
+            }
+        },
+        "firms_departments": {
+            "menu_section": "Кадры",
+            "mandatory": 0,
+            "title": "Подразделения организаций",
+            "title2": "Подразделения организаций",
+            "title3": "Подразделения организаций",
+            "table": "firms_departments",
+            "version": 1,
+            "conversion_table": {
+                "firm_id": {
+                    "lib": "firms",
+                    "type": "bigint"
+                },
+                "parent": {
+                    "lib": "firms_departments",
+                    "type": "bigint",
+                    "subfilter": [
+                        "firm_id"
+                    ]
+                },
+                "type": {
+                    "lib": "firms_departments_types",
+                    "type": "lib",
+                    "subfilter": [
+                        "firm_id"
+                    ]
+                },
+                "name": {
+                    "type": "string"
+                },
+                "short_name": {
+                    "type": "string"
+                },
+                "actual": {
+                    "type": "bool"
+                },
+                "author": {
+                    "lib": "users",
+                    "type": "int"
+                },
+                "create_tm": {
+                    "type": "timestamp"
+                }
+            },
+            "disabled_edit_fields": {
+                "author": 1,
+                "create_tm": 1
+            },
+            "default_values": {
+                "actual": 1
+            },
+            "translate": {
+                "firm_id": "Организация",
+                "parent": "Родительский элемент",
+                "type": "Тип",
+                "name": "Наименование",
+                "short_name": "Краткое наименование",
+                "actual": "Актуальный",
+                "author": "Автор",
+                "create_tm": "Время создания"
+            },
+            "enable_tree_view": 1,
+            "short_list_enabled_fields": {
+                "firm_id": 1,
+                "parent": 1,
+                "type": 1,
+                "name": 1,
+                "short_name": 1,
+                "actual": 1
+            },
+            "admin_flags": {
+                "view": {
+                    "name": "Просмотр",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "add": {
+                    "name": "Добавление",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "edit": {
+                    "name": "Редактирование",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "delete": {
+                    "name": "Удаление",
+                    "type": "checkbox",
+                    "default_checked": true
+                }
+            }
+        },
+        "firms_departments_types": {
+            "menu_section": "Кадры",
+            "mandatory": 0,
+            "title": "Типы подразделений предприятия",
+            "title2": "Типы подразделений предприятия",
+            "title3": "Типы подразделений предприятия",
+            "table": "firms_departments_types",
+            "version": 1,
+            "conversion_table": {
+                "firm_id": {
+                    "lib": "firms",
+                    "type": "lib"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "actual": {
+                    "type": "bool"
+                },
+                "author": {
+                    "lib": "users",
+                    "type": "int"
+                },
+                "create_tm": {
+                    "type": "timestamp"
+                }
+            },
+            "disabled_edit_fields": {
+                "author": 1,
+                "create_tm": 1
+            },
+            "default_values": {
+                "actual": 1
+            },
+            "translate": {
+                "firm_id": "Организация",
+                "name": "Наименование",
+                "actual": "Актуальный",
+                "author": "Автор",
+                "create_tm": "Время создания"
+            },
+            "short_list_enabled_fields": {
+                "firm_id": 1,
+                "name": 1,
+                "actual": 1
+            },
+            "admin_flags": {
+                "view": {
+                    "name": "Просмотр",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "add": {
+                    "name": "Добавление",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "edit": {
+                    "name": "Редактирование",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "delete": {
+                    "name": "Удаление",
+                    "type": "checkbox",
+                    "default_checked": true
+                }
+            }
+        },
+        "firms_positions": {
+            "menu_section": "Кадры",
+            "mandatory": 0,
+            "title": "Должности в организациях",
+            "title2": "Должности в организациях",
+            "title3": "Должности в организациях",
+            "table": "firms_positions",
+            "version": 1,
+            "conversion_table": {
+                "firm_id": {
+                    "lib": "firms",
+                    "type": "bigint"
+                },
+                "departments_ids": {
+                    "type": "lib_multi",
+                    "lib": "firms_departments",
+                    "multi": 1,
+                    "subfilter": [
+                        "firm_id"
+                    ]
+                },
+                "position_role_id": {
+                    "type": "lib",
+                    "lib": "firms_positions_roles",
+                    "subfilter": [
+                        "firm_id"
+                    ]
+                },
+                "name": {
+                    "type": "string"
+                },
+                "actual": {
+                    "type": "bool"
+                },
+                "author": {
+                    "lib": "users",
+                    "type": "lib"
+                },
+                "create_tm": {
+                    "type": "timestamp"
+                }
+            },
+            "disabled_edit_fields": {
+                "author": 1,
+                "create_tm": 1
+            },
+            "default_values": {
+                "actual": 1
+            },
+            "translate": {
+                "firm_id": "Организация",
+                "departments_ids": "Подразделения",
+                "position_role_id": "Роль в подразделении",
+                "name": "Наименование",
+                "actual": "Актуальный",
+                "author": "Автор",
+                "create_tm": "Время создания"
+            },
+            "short_list_enabled_fields": {
+                "firm_id": 1,
+                "departments_ids": 1,
+                "position_role_id": 1,
+                "name": 1,
+                "actual": 1
+            },
+            "admin_flags": {
+                "view": {
+                    "name": "Просмотр",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "add": {
+                    "name": "Добавление",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "edit": {
+                    "name": "Редактирование",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "delete": {
+                    "name": "Удаление",
+                    "type": "checkbox",
+                    "default_checked": true
+                }
+            }
+        },
+        "firms_staff": {
+            "menu_section": "Кадры",
+            "mandatory": 0,
+            "title": "Штатное расписание организации",
+            "title2": "Штатное расписание организации",
+            "title3": "Штатное расписание организации",
+            "table": "firms_staff",
+            "version": 1,
+            "conversion_table": {
+                "firm_id": {
+                    "lib": "firms",
+                    "type": "lib"
+                },
+                "department_id": {
+                    "type": "lib",
+                    "lib": "firms_departments",
+                    "subfilter": [
+                        "firm_id"
+                    ]
+                },
+                "position_id": {
+                    "type": "lib",
+                    "lib": "firms_positions",
+                    "subfilter": [
+                        "firm_id"
+                    ]
+                },
+                "cnt": {
+                    "type": "int"
+                },
+                "comment": {
+                    "type": "text"
+                },
+                "actual": {
+                    "type": "bool"
+                },
+                "author": {
+                    "lib": "users",
+                    "type": "lib"
+                },
+                "create_tm": {
+                    "type": "timestamp"
+                }
+            },
+            "disabled_edit_fields": {
+                "author": 1,
+                "create_tm": 1
+            },
+            "default_values": {
+                "actual": 1
+            },
+            "translate": {
+                "firm_id": "Организация",
+                "department_id": "Подразделение",
+                "position_id": "Должность",
+                "cnt": "Кол-во",
+                "comment": "Комментарий",
+                "actual": "Актуальный",
+                "author": "Автор",
+                "create_tm": "Время создания"
+            },
+            "short_list_enabled_fields": {
+                "firm_id": 1,
+                "department_id": 1,
+                "position_id": 1,
+                "cnt": 1,
+                "actual": 1
+            },
+            "admin_flags": {
+                "view": {
+                    "name": "Просмотр",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "add": {
+                    "name": "Добавление",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "edit": {
+                    "name": "Редактирование",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "delete": {
+                    "name": "Удаление",
+                    "type": "checkbox",
+                    "default_checked": true
+                }
+            }
+        },
+        "firms_persons": {
+            "menu_section": "Кадры",
+            "mandatory": 0,
+            "title": "Сотрудники организации",
+            "title2": "Сотрудники организации",
+            "title3": "Сотрудники организации",
+            "table": "firms_persons",
+            "version": 1,
+            "conversion_table": {
+                "firm_id": {
+                    "lib": "firms",
+                    "type": "bigint"
+                },
+                "department_id": {
+                    "type": "lib",
+                    "lib": "firms_departments",
+                    "subfilter": [
+                        "firm_id"
+                    ]
+                },
+                "position_id": {
+                    "type": "lib",
+                    "lib": "firms_positions",
+                    "subfilter": [
+                        "firm_id"
+                    ]
+                },
+                "person_id": {
+                    "type": "lib",
+                    "lib": "persons",
+                    "subfilter": [
+                        "firm_id"
+                    ]
+                },
+                "person_role_id": {
+                    "type": "lib",
+                    "lib": "firms_positions_roles",
+                    "subfilter": [
+                        "firm_id"
+                    ]
+                },
+                "comment": {
+                    "type": "text"
+                },
+                "actual": {
+                    "type": "bool"
+                },
+                "author": {
+                    "lib": "users",
+                    "type": "lib"
+                },
+                "create_tm": {
+                    "type": "timestamp"
+                }
+            },
+            "disabled_edit_fields": {
+                "author": 1,
+                "create_tm": 1
+            },
+            "default_values": {
+                "actual": 1
+            },
+            "translate": {
+                "firm_id": "Организация",
+                "department_id": "Подразделение",
+                "position_id": "Должность",
+                "person_id": "Физлицо",
+                "person_role_id": "Роль физлица",
+                "comment": "Комментарий",
+                "actual": "Актуальный",
+                "author": "Автор",
+                "create_tm": "Время создания"
+            },
+            "short_list_enabled_fields": {
+                "firm_id": 1,
+                "department_id": 1,
+                "position_id": 1,
+                "person_id": 1,
+                "person_role_id": 1,
+                "actual": 1
+            },
+            "admin_flags": {
+                "view": {
+                    "name": "Просмотр",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "add": {
+                    "name": "Добавление",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "edit": {
+                    "name": "Редактирование",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "delete": {
+                    "name": "Удаление",
+                    "type": "checkbox",
+                    "default_checked": true
+                }
+            }
+        },
+        "firms_positions_roles": {
+            "menu_section": "Кадры",
+            "mandatory": 0,
+            "title": "Роли сотрудников организации",
+            "title2": "Роли сотрудников организации",
+            "title3": "Роли сотрудников организации",
+            "table": "firms_positions_roles",
+            "version": 1,
+            "conversion_table": {
+                "firm_id": {
+                    "lib": "firms",
+                    "type": "lib"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "actual": {
+                    "type": "bool"
+                },
+                "author": {
+                    "lib": "users",
+                    "type": "int"
+                },
+                "create_tm": {
+                    "type": "timestamp"
+                }
+            },
+            "disabled_edit_fields": {
+                "author": 1,
+                "create_tm": 1
+            },
+            "default_values": {
+                "actual": 1
+            },
+            "translate": {
+                "firm_id": "Организация",
+                "name": "Наименование",
+                "actual": "Актуальный",
+                "author": "Автор",
+                "create_tm": "Время создания"
+            },
+            "short_list_enabled_fields": {
+                "firm_id": 1,
+                "name": 1,
+                "actual": 1
+            },
+            "admin_flags": {
+                "view": {
+                    "name": "Просмотр",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "add": {
+                    "name": "Добавление",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "edit": {
+                    "name": "Редактирование",
+                    "type": "checkbox",
+                    "default_checked": true,
+                    "need_fields_setting": 1
+                },
+                "delete": {
+                    "name": "Удаление",
+                    "type": "checkbox",
+                    "default_checked": true
+                }
+            }
+        }
+    }
+}

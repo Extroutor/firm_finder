@@ -1,0 +1,93 @@
+<?php
+
+CApplication::includeComposer();
+
+class CFirmsFinder extends CModule
+{
+	function CFirmsFinder()
+	{
+		$this->default_period = "day";
+		$this->budget_by_date = array();
+		$this->sum_fields = ['plan', 'fact', 'plan_edited', 'fact_edited'];
+		$this->period_start = 0;
+		$this->period_end = 0;
+		$this->month_names = [
+			"январь",
+			"февраль",
+			"март",
+			"апрель",
+			"май",
+			"июнь",
+			"июль",
+			"август",
+			"сентябрь",
+			"октябрь",
+			"ноябрь",
+			"декабрь"
+		];
+	}
+
+	public function ajax($inline = 0)
+	{
+		global $data;
+
+		$field = CDataSanitizer::sanitizeIdentifier(CRouter::$request_params["field"]);
+		$value = CDataSanitizer::sanitizeIdentifier(CRouter::$request_params["value"]);
+
+		if ($value && $field)
+		{
+			$token = \Framework\Secrets\Secrets::getAll('app_secrets','firms')['token'];
+			$secret = \Framework\Secrets\Secrets::getAll('app_secrets','firms')['secret'];
+
+			if (is_null($token) || is_null($secret))
+			{
+				CAjaxResponse::getInstance()
+					->addError("Отсутствуют настройки к внешнему API! Обратитесь к администратору.")->sendJSON();
+			}
+			$dadata = new \Dadata\DadataClient($token, $secret);
+			if ($field === "inn")
+				$response = $dadata->findById("party", $value);
+			else
+				$response = $dadata->findById("party", $inn, 1, ["kpp" => $value]);
+			if ($response[0])
+			{
+				$firm_data = $response[0]['data'];
+
+				$out_data = [];
+				$out_data['full_name'] = $firm_data['name']['full_with_opf'];
+				$out_data['name'] = $firm_data['name']['short_with_opf'];
+
+				$fields = ['inn', 'kpp', 'ogrn', 'okpo', 'okato', 'oktmo', 'okogu', 'okfs', 'okved', 'okveds'];
+				foreach ($fields as $f)
+					$out_data[$f] = $firm_data[$f];
+				$out_data['uraddress'] = $firm_data['address']['unrestricted_value'];
+				$out_data['address'] = $firm_data['address']['unrestricted_value'];
+				$out_data['post_address'] = $firm_data['address']['unrestricted_value'];
+				$out_data['type'] = $firm_data['type'];
+				switch ($out_data['type'])
+				{
+					case "LEGAL":
+						$out_data['type'] = 1;
+						break;
+					case "INDIVIDUAL":
+						$out_data['type'] = 2;
+						break;
+				}
+				$out_data['family_name'] = $firm_data["fio"]['surname'];
+				$out_data['fiz_name'] = $firm_data["fio"]['name'];
+				$out_data['surname'] = $firm_data["patronymic"]['surname'];
+				$city_nm = $firm_data['address']['data']['city'];
+				$res = CDBConn::q("select * from cities where name like '%".CDBConn::escape($city_nm)."%' limit 0,1");
+				if ($rw = $res->fetch(PDO::FETCH_ASSOC))
+				{
+					$out_data['__city'] = $rw["id"];
+					$out_data['city'] = $rw["name"];
+				}
+				$out_data['gendir_title'] = $firm_data['management']['post'];
+				$out_data['gendir_name'] = $firm_data['management']['name'];
+				$data[0] = $out_data;
+			}
+		}
+	}
+
+}

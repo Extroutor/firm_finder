@@ -1,0 +1,33 @@
+{
+    "path": "/plugins/base/firms_finder",
+    "module": "firms_finder",
+    "category": "Финансирование и бухгалтерия",
+    "title": "Автозаполнение реквизитов фирм",
+    "module_class_name": "CFirmsFinder",
+    "src": [
+        "CFirmsFinder.class"
+    ],
+    "js": [
+        "firms_finder.js"
+    ],
+    "css": [
+        "firms_finder.scss"
+    ],
+    "routes": {
+        "ajax": [
+            {
+                "name": "firms_finder",
+                "check_rules": [
+                    {
+                        "type": "request_uri",
+                        "regexp": "firms_finder"
+                    }
+                ],
+                "modules": {
+                    "firms_finder": []
+                },
+                "break_routing": 1
+            }
+        ]
+    }
+}
